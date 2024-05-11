@@ -1,6 +1,7 @@
 using API.Data;
 using API.Models.Domain;
 using API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories.Implementation
 {
@@ -18,6 +19,11 @@ namespace API.Repositories.Implementation
             await _dbContext.BlogPosts.AddAsync(blogPost);
             await _dbContext.SaveChangesAsync();
             return blogPost;
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetAllAsync()
+        {
+            return await _dbContext.BlogPosts.ToListAsync();
         }
     }
 }
